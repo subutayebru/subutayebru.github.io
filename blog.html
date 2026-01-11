@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · Ebru Subutay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Ebru Subutay</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a class="active" href="blog.html">Blog</a>
+        <a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>Blog</h1>
+      <p class="sub">
+        Auto-synced from Medium (latest posts). If a post doesn’t show up, open Medium directly below.
+      </p>
+      <div class="badges">
+        <span class="badge" id="status">Loading Medium feed…</span>
+        <a class="badge" id="mediumLink" href="#" target="_blank" rel="noopener">Open Medium</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Latest posts</h2>
+      <div id="posts" class="list"></div>
+    </div>
+
+    <div class="footer">
+      <p><small>Feed source: <code id="feedUrl"></code></small></p>
+    </div>
+  </div>
+
+  <script>
+    // 1) PUT YOUR MEDIUM USERNAME HERE:
+    const MEDIUM_RSS = "https://medium.com/feed/@YOUR_MEDIUM_USERNAME";
+    // If you write under a publication, use:
+    // const MEDIUM_RSS = "https://medium.com/feed/YOUR_PUBLICATION_NAME";
+
+    // 2) CORS-friendly proxy (lets browsers fetch RSS)
+    const PROXY = "https://api.allorigins.win/raw?url=";
+
+    const statusEl = document.getElementById("status");
+    const postsEl = document.getElementById("posts");
+    const feedEl = document.getElementById("feedUrl");
+    const mediumLink = document.getElementById("mediumLink");
+
+    feedEl.textContent = MEDIUM_RSS;
+    mediumLink.href = MEDIUM_RSS.replace("/feed/", "/"); // decent default
+
+    function formatDate(d) {
+      try {
+        return new Date(d).toLocaleDateString(undefined, { year:"numeric", month:"short", day:"2-digit" });
+      } catch { return ""; }
+    }
+
+    function stripHtml(html) {
+      const tmp = document.createElement("div");
+      tmp.innerHTML = html || "";
+      return (tmp.textContent || tmp.innerText || "").trim();
+    }
+
+    async function loadFeed() {
+      try {
+        const res = await fetch(PROXY + encodeURIComponent(MEDIUM_RSS));
+        if (!res.ok) throw new Error("Fetch failed: " + res.status);
+        const xmlText = await res.text();
+
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlText, "text/xml");
+        const items = Array.from(xml.querySelectorAll("item")).slice(0, 12);
+
+        if (!items.length) {
+          statusEl.textContent = "No posts found (check your Medium feed URL).";
+          return;
+        }
+
+        postsEl.innerHTML = "";
+        for (const it of items) {
+          const title = stripHtml(it.querySelector("title")?.textContent);
+          const link = it.querySelector("link")?.textContent?.trim();
+          const pubDate = it.querySelector("pubDate")?.textContent?.trim();
+          const desc = stripHtml(it.querySelector("description")?.textContent).slice(0, 180);
+
+          const div = document.createElement("div");
+          div.className = "item";
+          div.innerHTML = `
+            <a class="title" href="${link}" target="_blank" rel="noopener">${title}</a>
+            <div class="meta">${formatDate(pubDate)} · ${desc}${desc.length === 180 ? "…" : ""}</div>
+          `;
+          postsEl.appendChild(div);
+        }
+
+        statusEl.textContent = "Synced from Medium ✓";
+      } catch (e) {
+        statusEl.textContent = "Couldn’t load Medium feed (open Medium link).";
+        postsEl.innerHTML = `
+          <div class="item">
+            <div class="title">Feed load error</div>
+            <div class="meta">${(e && e.message) ? e.message : "Unknown error"}</div>
+          </div>
+        `;
+      }
+    }
+
+    loadFeed();
+  </script>
+</body>
+</html>
