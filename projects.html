@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Projects · Ebru Subutay</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="nav">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Ebru Subutay</span>
+      </div>
+      <div class="navlinks">
+        <a href="index.html">Home</a>
+        <a class="active" href="projects.html">Projects</a>
+        <a href="blog.html">Blog</a>
+        <a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </div>
+
+    <div class="hero">
+      <h1>Projects</h1>
+      <p class="sub">
+        A curated selection. Each card is designed to answer: what it is, why it matters, what I built, and where to see it.
+      </p>
+      <div class="badges">
+        <span class="badge">Tip: keep it to 4–8 projects max</span>
+        <span class="badge">Each: 1 sentence + 3 bullets</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Featured</h2>
+      <div id="projects" class="list"></div>
+    </div>
+
+    <div class="footer">
+      <p><small>Want to add screenshots? Put them in <code>/assets/projects/</code> and link them in the card.</small></p>
+    </div>
+  </div>
+
+  <script src="projects.js"></script>
+    <script>
+    const root = document.getElementById("projects");
+
+    function tagPills(tags){
+        return (tags || []).map(t => `<span class="badge">${t}</span>`).join("");
+    }
+    function linkButtons(links){
+        return (links || []).map(l => `<a class="badge" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
+    }
+    function bulletsList(bullets){
+        return (bullets || []).map(b => `<li>${b}</li>`).join("");
+    }
+
+    (window.PROJECTS || []).forEach(p => {
+        const el = document.createElement("div");
+        el.className = "project-card";
+
+        el.innerHTML = `
+        <a class="project-img" href="${(p.links && p.links[0] && p.links[0].url) ? p.links[0].url : '#'}" target="_blank" rel="noopener">
+            <img src="${p.image || ''}" alt="${p.imageAlt || p.title}" loading="lazy" decoding="async" />
+        </a>
+
+        <div>
+            <div class="title">${p.title}</div>
+            <div class="meta">${p.blurb}</div>
+
+            <div class="badges" style="margin-top:10px;">
+            ${tagPills(p.tags)}
+            <span style="flex:1"></span>
+            ${linkButtons(p.links)}
+            </div>
+
+            <ul style="margin:10px 0 0 18px;">
+            ${bulletsList(p.bullets)}
+            </ul>
+        </div>
+        `;
+
+        root.appendChild(el);
+    });
+    </script>
+
+</body>
+</html>
