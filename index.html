@@ -3,84 +3,191 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ebru Subutay</title>
-  <meta name="description" content="Robotics / Perception Engineer" />
+  <title>Ebru Subutay · Robotics & AI</title>
+  <meta name="description" content="Robotics & AI engineer: SLAM, event cameras, 3D vision, VLA. Projects + writing." />
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <span class="dot"></span>
+  <!-- Top nav -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#home">
+        <span class="brand-dot"></span>
         <span>Ebru Subutay</span>
-      </div>
-      <div class="navlinks">
-        <a class="active" href="index.html">Home</a>
+      </a>
+
+      <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        ☰
+      </button>
+
+      <nav class="nav" id="nav">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
         <a href="blog.html">Blog</a>
-        <a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-cta" href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <main id="home" class="hero">
+    <div class="container hero-inner">
+      <div class="hero-left">
+        <h1>
+          <span class="hero-name">Ebru</span><br />
+          <span class="hero-name">Subutay</span>
+        </h1>
+
+        <p class="hero-tagline">Robotics Vision · SLAM · Event Cameras · VLA</p>
+
+        <p class="hero-sub">
+          I build real-time perception and mapping systems—turning sensor streams into stable, usable autonomy.
+          This website is my engineering hub (projects + notes). Photography will live here later too.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#projects">View my work</a>
+          <a class="btn btn-ghost" href="blog.html">Read posts</a>
+        </div>
+
+        <div class="hero-links">
+          <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noopener">LinkedIn</a>
+          <span class="dot-sep">•</span>
+          <a href="https://medium.com/@YOUR_MEDIUM_USERNAME" target="_blank" rel="noopener">Medium</a>
+          <span class="dot-sep">•</span>
+          <a href="mailto:YOUR_EMAIL@example.com">Email</a>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <!-- Optional hero image. If you don’t have it yet, keep it and it’ll just show a gradient block. -->
+        <div class="hero-card">
+          <div class="hero-img" role="img" aria-label="Hero image"
+               style="background-image:url('assets/img/hero.jpg');"></div>
+          <div class="hero-card-text">
+            <div class="pill">Currently</div>
+            <div class="hero-card-title">Building portfolio write-ups</div>
+            <div class="hero-card-sub">BEV · Stereo · vSLAM · VLA robotics</div>
+          </div>
+        </div>
       </div>
     </div>
+  </main>
 
-    <div class="hero">
-      <h1>Robotics & 3D Computer Vision Engineer</h1>
-      <p class="sub">
-        I build real-time perception + mapping systems: SLAM, event-based vision, 3D reconstruction, and vision-language-action pipelines.
-        This site is my engineering hub (projects + notes). 
-        
-        I am also a photographer! coming later ✨
+  <!-- Sections -->
+  <section id="about" class="section">
+    <div class="container split">
+      <div class="media">
+        <div class="img" style="background-image:url('assets/img/about.jpg');"></div>
+      </div>
+      <div class="content">
+        <h2>About</h2>
+        <p>
+          I work at the intersection of geometry + learning: SLAM, 3D reconstruction, event-based vision, and
+          vision-language-action pipelines for robotics.
+        </p>
+        <div class="links">
+          <a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
+          <a href="blog.html">Blog (Medium feed)</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="projects" class="section">
+    <div class="container">
+      <h2>Projects</h2>
+      <p class="section-sub">
+        Curated highlights. Each section has an image + short description + links (same structure as AlbertaBeef). :contentReference[oaicite:1]{index=1}
       </p>
 
-      <div class="badges">
-        <span class="badge">SLAM</span>
-        <span class="badge">Multi-sensor Fusion (RGBD- LiDAR - Event Cameras)</span>
-        <span class="badge">3D Computer Vision</span>
-        <span class="badge">ROS2</span>
-        <span class="badge">VLA / Robot Learning</span>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="card">
-        <h2>Featured</h2>
-        <div class="list">
-          <div class="item">
-            <div class="title">Portfolio / Projects</div>
-            <div class="meta">Curated list of (papers, demos, repos, write-ups).</div>
-          </div>
-          <div class="item">
-            <div class="title">Latest writing</div>
-            <div class="meta">See <a href="blog.html">Blog</a> — auto-imported from Medium.</div>
-          </div>
+      <!-- Project 1: Stereo Distance Estimator -->
+      <div class="split">
+        <div class="media">
+          <div class="img"
+              style="background-image:url('assets/img/stereo-distance.gif');"></div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;">
-          <img src="assets/projects/vla-franka.png"
-              style="width:100%;height:120px;object-fit:cover;border-radius:14px;border:1px solid rgba(255,255,255,0.08);"
-              loading="lazy">
+        <div class="content">
+          <h3>Stereo Distance Estimator</h3>
+          <p>
+            End-to-end stereo pipeline to estimate object distance: calibration → disparity → depth → distance evaluation,
+            with practical visualization and metrics.
+          </p>
+          <ul class="bullets">
+            <li>Dense depth from stereo (disparity → depth)</li>
+            <li>Object distance estimation + evaluation workflow</li>
+            <li>Clear visuals (point cloud / overlays) for debugging</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/subutayebru/stereo-distance-estimator" target="_blank" rel="noopener">Repo</a>
+            <a href="blog.html">Write-up</a>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <h2>Links</h2>
-        <ul>
-          <li><a href="blog.html">Blog (Medium feed)</a></li>
-          <li><a href="projects.html">Projects</a></li>
-          <li><a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a></li>
-          <li><a href="https://medium.com/@subutayebru" target="_blank" rel="noopener">Medium</a></li>
-          <li><a href="mailto:subutayebru@gmail.com">Email</a></li>
-        </ul>
-        <p><small>Tip: later you can add a CV PDF in <code>/assets/</code> and link it here.</small></p>
+      <hr class="divider soft" />
+
+      <!-- Project 2: VLA Franka -->
+      <div class="split reverse">
+        <div class="media">
+          <div class="img"
+              style="background-image:url('assets/img/vla-franka.jpg');"></div>
+        </div>
+        <div class="content">
+          <h3>VLA Franka (MuJoCo)</h3>
+          <p>
+            Vision-language-action manipulation in simulation: natural-language instructions mapped to robot actions with a
+            structured control loop and reproducible setup.
+          </p>
+          <ul class="bullets">
+            <li>Vision → instruction → action loop</li>
+            <li>Control integration (PID/IK) + diagnostics logging</li>
+            <li>Reproducible environment for demos and iteration</li>
+          </ul>
+          <div class="links">
+            <a href="https://github.com/subutayebru/vla_franka" target="_blank" rel="noopener">Repo</a>
+            <a href="blog.html">Write-up</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <section id="contact" class="section">
+    <div class="container split">
+      <div class="content">
+        <h2>Contact</h2>
+        <p>Best way to reach me: email. I also post technical write-ups on Medium.</p>
+        <div class="links">
+          <a href="mailto:YOUR_EMAIL@example.com">YOUR_EMAIL@example.com</a>
+          <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://medium.com/@YOUR_MEDIUM_USERNAME" target="_blank" rel="noopener">Medium</a>
+        </div>
+      </div>
+      <div class="media">
+        <div class="contact-card">
+          <div class="pill">Open to</div>
+          <div class="contact-title">Robotics / Vision roles</div>
+          <div class="contact-sub">Berlin · Munich · Remote (EU)</div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <div class="footer">
-      <p>© <span id="year"></span> Ebru Subutay · Built on GitHub Pages</p>
+  <footer class="footer">
+    <div class="container">
+      <span>© <span id="year"></span> Ebru Subutay</span>
     </div>
-  </div>
+  </footer>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
+  <script src="main.js"></script>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
 </body>
 </html>
