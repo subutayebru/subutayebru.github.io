@@ -1,89 +1,386 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects · Ebru Subutay</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Ebru Subutay</title>
+  <meta name="description" content="Projects by Ebru Subutay: humanoid VLA manipulation, robot-arm VLA control in MuJoCo, autonomous robotics for ship recycling, industrial video understanding, stereo 3D vision, event-based ego-motion, and the interactive Physics Atlas web app." />
+  <meta name="color-scheme" content="dark light" />
+  <!-- Favicon: koi fish yin-yang (from emojis.com). -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+
+  <!-- No-flash theme: set data-theme before first paint. -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("theme");
+        if (t !== "light" && t !== "dark") {
+          t =
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches
+              ? "light"
+              : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    })();
+  </script>
+
+  <!-- Google Fonts: thin geometric display (Jost) + readable body (Inter) + mono micro-labels (Space Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Jost:wght@200;300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="nav">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>Ebru Subutay</span>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="rail">
+    <div class="rail__head">
+      <a class="rail__brand" href="index.html" aria-label="Ebru Subutay — home">
+        <span>Ebru</span><span>Subutay</span>
+      </a>
+      <div class="rail__controls">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-pressed="true" aria-label="Switch to light theme">
+          <span class="theme-toggle__icon" aria-hidden="true">&#9790;</span>
+          <span class="theme-toggle__track" aria-hidden="true"><span class="theme-toggle__thumb"></span></span>
+          <span class="theme-toggle__icon" aria-hidden="true">&#9788;</span>
+        </button>
+        <button class="rail__burger" id="nav-burger" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Open menu">
+          <span></span><span></span><span></span>
+        </button>
       </div>
-      <div class="navlinks">
+    </div>
+    <div class="rail__panel" id="nav-panel">
+      <nav class="rail__nav" aria-label="Primary">
         <a href="index.html">Home</a>
-        <a class="active" href="projects.html">Projects</a>
+        <a href="projects.html" aria-current="page">Works</a>
         <a href="blog.html">Blog</a>
-        <a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a>
-      </div>
-    </div>
-
-    <div class="hero">
-      <h1>Projects</h1>
-      <p class="sub">
-        A curated selection. Each card is designed to answer: what it is, why it matters, what I built, and where to see it.
-      </p>
-      <div class="badges">
-        <span class="badge">Tip: keep it to 4–8 projects max</span>
-        <span class="badge">Each: 1 sentence + 3 bullets</span>
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>Featured</h2>
-      <div id="projects" class="list"></div>
-    </div>
-
-    <div class="footer">
-      <p><small>Want to add screenshots? Put them in <code>/assets/projects/</code> and link them in the card.</small></p>
-    </div>
-  </div>
-
-  <script src="projects.js"></script>
-    <script>
-    const root = document.getElementById("projects");
-
-    function tagPills(tags){
-        return (tags || []).map(t => `<span class="badge">${t}</span>`).join("");
-    }
-    function linkButtons(links){
-        return (links || []).map(l => `<a class="badge" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join("");
-    }
-    function bulletsList(bullets){
-        return (bullets || []).map(b => `<li>${b}</li>`).join("");
-    }
-
-    (window.PROJECTS || []).forEach(p => {
-        const el = document.createElement("div");
-        el.className = "project-card";
-
-        el.innerHTML = `
-        <a class="project-img" href="${(p.links && p.links[0] && p.links[0].url) ? p.links[0].url : '#'}" target="_blank" rel="noopener">
-            <img src="${p.image || ''}" alt="${p.imageAlt || p.title}" loading="lazy" decoding="async" />
+        <a href="photography.html">Gallery</a>
+      </nav>
+      <div class="rail__social">
+        <a href="https://github.com/subutayebru" target="_blank" rel="noopener" aria-label="GitHub">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.5 11.5 0 0 0 .5 12a11.5 11.5 0 0 0 7.86 10.92c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.53-1.34-1.3-1.7-1.3-1.7-1.06-.72.08-.71.08-.71 1.17.08 1.79 1.2 1.79 1.2 1.04 1.79 2.73 1.27 3.4.97.1-.76.4-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.24 2.76.12 3.05.74.81 1.18 1.84 1.18 3.1 0 4.43-2.7 5.4-5.28 5.69.42.36.79 1.07.79 2.16v3.2c0 .31.21.67.8.56A11.5 11.5 0 0 0 23.5 12 11.5 11.5 0 0 0 12 .5Z"/></svg>
         </a>
+        <a href="https://www.linkedin.com/in/ebru-subutay-176697139/" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 1 1 0-4.14 2.07 2.07 0 0 1 0 4.14zM7.12 20.45H3.55V9h3.57v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+        </a>
+        <a href="https://medium.com/@subutayebru" target="_blank" rel="noopener" aria-label="Medium">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42s-3.39-2.88-3.39-6.42 1.52-6.42 3.39-6.42S20.96 8.46 20.96 12M24 12c0 3.17-.53 5.75-1.19 5.75s-1.19-2.58-1.19-5.75.53-5.75 1.19-5.75S24 8.83 24 12z"/></svg>
+        </a>
+        <a href="mailto:subutayebru@gmail.com" aria-label="Email">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 4h20a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm10 7.2 8-5.2H4l8 5.2zM3 7.3V18h18V7.3l-8.45 5.5a1 1 0 0 1-1.1 0L3 7.3z"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
 
-        <div>
-            <div class="title">${p.title}</div>
-            <div class="meta">${p.blurb}</div>
+  <main id="main">
+    <section class="section" aria-labelledby="proj-h">
+      <div class="wrap">
+        <p class="eyebrow">Works</p>
+        <h1 class="heading" id="proj-h">Things I've built</h1>
+        <p class="section-sub">
+          From classical stereo geometry to learned vision-language-action control —
+          plus a few interactive things I make for the web.
+        </p>
 
-            <div class="badges" style="margin-top:10px;">
-            ${tagPills(p.tags)}
-            <span style="flex:1"></span>
-            ${linkButtons(p.links)}
-            </div>
+        <!-- ===================================================================
+             Section A — Robotics & Perception (primary focus, first)
+             =================================================================== -->
+        <section class="proj-section" aria-labelledby="robotics-h">
+          <div class="section-head">
+            <h2 class="heading" id="robotics-h">Robotics &amp; Perception</h2>
+            <p class="section-sub">My main focus — real-time perception, VLA &amp; control for robots.</p>
+          </div>
 
-            <ul style="margin:10px 0 0 18px;">
-            ${bulletsList(p.bullets)}
-            </ul>
+          <div class="grid grid--2">
+
+            <!-- Project 1 — Humanoid VLA (Unitree G1) -->
+            <!-- Real demo clip (G1 walking); poster is a real still.
+                 Autoplay is gated on prefers-reduced-motion in script.js. -->
+            <article class="card">
+              <div class="card__media">
+                <video class="card__video" data-autoplay muted loop playsinline preload="metadata"
+                       poster="assets/projects/g1-humanoid.jpg"
+                       aria-label="Looping demo clip: a Unitree G1 humanoid robot walking on flat ground in a MuJoCo simulation">
+                  <source src="assets/projects/g1_walk_flat.mp4" type="video/mp4" />
+                </video>
+              </div>
+              <div class="card__body">
+                <p class="card__date">May 2026 – Present</p>
+                <h3 class="card__title">Humanoid Manipulation with a Learned VLA Policy (Unitree G1)</h3>
+                <p class="card__blurb">
+                  End-to-end robot-learning pipeline for language-conditioned tabletop
+                  manipulation (reach / grasp / pick / place) on a Unitree G1 humanoid in MuJoCo.
+                </p>
+                <ul class="bullets">
+                  <li>Scripted scenario &amp; demo generation in MuJoCo</li>
+                  <li>ACT (Action-Chunking Transformer) policy training in PyTorch</li>
+                  <li>Offline + closed-loop evaluation</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">unitree-g1</span>
+                  <span class="tag-pill">mujoco</span>
+                  <span class="tag-pill">act</span>
+                  <span class="tag-pill">pytorch</span>
+                  <span class="tag-pill">imitation-learning</span>
+                </div>
+                <div class="card__links">
+                  <span class="tag-pill" aria-disabled="true">links coming soon</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 2 — VLA Franka (MuJoCo) — REAL image -->
+            <article class="card">
+              <div class="card__media">
+                <img src="assets/projects/vla-franka.png"
+                     alt="Franka Emika Panda arm in a MuJoCo simulation performing a vision-language-action manipulation task"
+                     loading="lazy" />
+              </div>
+              <div class="card__body">
+                <p class="card__date">Nov 2025 – Dec 2025</p>
+                <h3 class="card__title">Vision-Language-Action Control of a Robot Arm (Franka, MuJoCo)</h3>
+                <p class="card__blurb">
+                  MuJoCo simulation of the Franka Emika Panda arm integrated with a
+                  Transformer-based VLA (OpenVLA, quantized) for closed-loop control from camera images.
+                </p>
+                <ul class="bullets">
+                  <li>Full perception &rarr; action loop; motion generation (IK + PID)</li>
+                  <li>Configurable tasks, local inference, logging/benchmarking (also evaluated SmolVLA)</li>
+                  <li>Complete simulation-to-policy-evaluation pipeline for embodied foundation models</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">openvla</span>
+                  <span class="tag-pill">smolvla</span>
+                  <span class="tag-pill">mujoco</span>
+                  <span class="tag-pill">franka</span>
+                  <span class="tag-pill">ik/pid</span>
+                  <span class="tag-pill">quantization</span>
+                </div>
+                <div class="card__links">
+                  <a class="btn btn--primary" href="https://github.com/subutayebru/vla_franka" target="_blank" rel="noopener">View repo ↗</a>
+                </div>
+              </div>
+            </article>
+ 
+            <!-- Project 3 — SHEREC (EU HORIZON) — HIDDEN. -->
+            <!--
+            <article class="card">
+              <div class="card__media card__media--placeholder" role="img"
+                   aria-label="Preview coming soon for SHEREC autonomous robotics project">
+                <span class="ph-label">SHEREC</span>
+                <span class="ph-note">Preview coming soon</span>
+              </div>
+              <div class="card__body">
+                <p class="card__date">2024 – 2025</p>
+                <h3 class="card__title">SHEREC — Safe, Healthy &amp; Environmental ship RECycling (EU HORIZON)</h3>
+                <p class="card__blurb">
+                  Perception, localization, and control software for autonomous robotic
+                  platforms, focused on Sim2Real transfer and deployment on real hardware.
+                </p>
+                <ul class="bullets">
+                  <li>Isaac Sim environments; adapted the Aerostack2 autonomy stack onto a custom drone; validated on NVIDIA Jetson Orin</li>
+                  <li>Visual/LiDAR SLAM (ORB-SLAM3, DEVO, Ultimate SLAM, FastLIO, GLIM); 3D reconstruction (Gaussian Splatting, NeRF); onboard YOLO</li>
+                  <li>Sim-to-field transfer, structured logging, controlled failure analysis</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">isaac-sim</span>
+                  <span class="tag-pill">aerostack2</span>
+                  <span class="tag-pill">jetson-orin</span>
+                  <span class="tag-pill">slam</span>
+                  <span class="tag-pill">gaussian-splatting</span>
+                  <span class="tag-pill">nerf</span>
+                  <span class="tag-pill">yolo</span>
+                </div>
+                <div class="card__links">
+                  <a class="btn btn--primary" href="https://www.linkedin.com/company/sherec/" target="_blank" rel="noopener">Project ↗</a>
+                  <a class="btn" href="https://github.com/aerostack2/aerostack2" target="_blank" rel="noopener">Aerostack2 ↗</a>
+                </div>
+              </div>
+            </article>  
+          
+
+            -->
+
+            <!-- Project 4 — Industrial Video Understanding -->
+            <!-- No real image yet. Drop one at assets/projects/industrial-video.* and replace
+                 the placeholder below with an <img> like the vla-franka card. -->
+            <article class="card">
+              <div class="card__media card__media--placeholder" role="img"
+                   aria-label="Preview coming soon for Industrial Video Understanding for Action Recognition">
+                <span class="ph-label">Video Understanding</span>
+                <span class="ph-note">Preview coming soon</span>
+              </div>
+              <div class="card__body">
+                <p class="card__date">Feb 2026 – Mar 2026</p>
+                <h3 class="card__title">Industrial Video Understanding for Action Recognition</h3>
+                <p class="card__blurb">
+                  Industrial video-analysis pipeline for robotic task sequences with
+                  structured offline evaluation.
+                </p>
+                <ul class="bullets">
+                  <li>Preprocessing, frame selection, temporal redundancy handling</li>
+                  <li>Compared baseline modeling choices for action recognition</li>
+                  <li>Analyzed prediction stability, confidence trends, failure cases for deployment-oriented CV</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">video-understanding</span>
+                  <span class="tag-pill">action-recognition</span>
+                  <span class="tag-pill">temporal-modeling</span>
+                  <span class="tag-pill">evaluation</span>
+                </div>
+                <div class="card__links">
+                  <a class="btn btn--primary" href="https://github.com/subutayebru/video_action_recognition_case_study" target="_blank" rel="noopener">View repo ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 5 — Stereo / Bounding Boxes vs Segmentation — REAL image -->
+            <article class="card">
+              <div class="card__media">
+                <img src="assets/projects/stereo-distance.gif"
+                     alt="Animated stereo depth pipeline output showing disparity map and estimated object distance overlays"
+                     loading="lazy" />
+              </div>
+              <div class="card__body">
+                <p class="card__date">Dec 2025 – Jan 2026</p>
+                <h3 class="card__title">From 2D Perception to 3D Object Understanding: Bounding Boxes vs. Segmentation</h3>
+                <p class="card__blurb">
+                  Real-time stereo depth pipeline (SGBM and CreStereo) converting
+                  disparity to metric 3D geometry via reprojection and triangulation.
+                </p>
+                <ul class="bullets">
+                  <li>Disparity &rarr; metric depth &rarr; 3D geometry (reprojection / triangulation)</li>
+                  <li>Bounding-box vs. segmentation-based lifting of 2D objects to 3D</li>
+                  <li>Robustness under viewpoint and occlusion changes</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">stereo</span>
+                  <span class="tag-pill">sgbm</span>
+                  <span class="tag-pill">crestereo</span>
+                  <span class="tag-pill">3d-vision</span>
+                  <span class="tag-pill">depth</span>
+                  <span class="tag-pill">geometry</span>
+                </div>
+                <div class="card__links">
+                  <a class="btn btn--primary" href="https://medium.com/@subutayebru/bounding-boxes-vs-segmentation-the-best-way-to-turn-2d-objects-to-3d-dbc52601739c" target="_blank" rel="noopener">Read on Medium ↗</a>
+                  <a class="btn" href="https://github.com/subutayebru/stereo-distance-estimator" target="_blank" rel="noopener">View repo ↗</a>
+                </div>
+              </div>
+            </article>
+            
+
+            <!-- Project 6 — Master Thesis: Ego-motion from Events + Depth -->
+            <!-- No real image yet. Drop one at assets/projects/egomotion.* and replace
+                 the placeholder below with an <img> like the vla-franka card. -->
+            <!-- <article class="card">
+              <div class="card__media card__media--placeholder" role="img"
+                   aria-label="Preview coming soon for Master Thesis on ego-motion estimation">
+                <span class="ph-label">MSc Thesis</span>
+                <span class="ph-note">Preview coming soon</span>
+              </div>
+              <div class="card__body">
+                <p class="card__date">Oct 2022 – Jun 2023</p>
+                <h3 class="card__title">Master Thesis: Ego-motion Estimation by Fusing Events and Depth</h3>
+                <p class="card__blurb">
+                  Perception-driven ego-motion estimation pipeline combining
+                  event-camera data and depth.
+                </p>
+                <ul class="bullets">
+                  <li>Event + depth fusion for ego-motion estimation</li>
+                  <li>Foundations for sensor-fused robotic interaction</li>
+                  <li>3D computer vision and event-based perception</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">event-cameras</span>
+                  <span class="tag-pill">depth-fusion</span>
+                  <span class="tag-pill">ego-motion</span>
+                  <span class="tag-pill">3d-vision</span>
+                  <span class="tag-pill">msc-thesis</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section> -->
+
+        <!-- ===================================================================
+             Section B — Interactive & Web Apps (secondary)
+             =================================================================== -->
+        <section class="proj-section proj-section--apps" aria-labelledby="apps-h">
+          <div class="section-head">
+            <h2 class="heading" id="apps-h">Interactive &amp; Web Apps</h2>
+            <p class="section-sub">Beyond robotics — interactive tools &amp; data-viz I build for the web.</p>
+          </div>
+
+          <div class="grid grid--2">
+
+            <!-- Project 7 — Physics Atlas — REAL image (live-app screenshot) -->
+            <article class="card">
+              <div class="card__media">
+                <img src="assets/projects/physics-atlas.png"
+                     alt="Physics Atlas web app: an interactive knowledge graph of physics topics on a starfield background, with prerequisite edges connecting concept nodes"
+                     loading="lazy" />
+              </div>
+              <div class="card__body">
+                <p class="card__date">Side project · Ongoing</p>
+                <h3 class="card__title">Physics Atlas — Learn Physics by Prerequisites</h3>
+                <p class="card__blurb">
+                  An interactive prerequisite map of physics — explore how concepts
+                  build on each other, from high-school algebra up to quantum gravity,
+                  and generate a learning path to any goal topic.
+                </p>
+                <ul class="bullets">
+                  <li>Interactive knowledge-graph of ~40 physics topics with prerequisite edges (click a concept to light its full dependency tree)</li>
+                  <li>"Learning goal" mode builds a path to any target topic; live search + full-map view</li>
+                  <li>Nodes categorized (foundation math · core physics · advanced · goal) over a starfield UI</li>
+                </ul>
+                <div class="card__links">
+                  <span class="tag-pill">react</span>
+                  <span class="tag-pill">vite</span>
+                  <span class="tag-pill">cytoscape</span>
+                  <span class="tag-pill">knowledge-graph</span>
+                  <span class="tag-pill">data-viz</span>
+                  <span class="tag-pill">education</span>
+                  <span class="tag-pill">github-pages</span>
+                </div>
+                <div class="card__links">
+                  <a class="btn btn--primary" href="https://subutayebru.github.io/physics-atlas/?mode=map" target="_blank" rel="noopener">Visit live ↗</a>
+                </div>
+              </div>
+            </article>
+
+            <!-- more apps coming -->
+
+          </div>
+        </section>
+
+        <div class="btn-row">
+          <a class="btn" href="https://github.com/subutayebru" target="_blank" rel="noopener">More on GitHub ↗</a>
         </div>
-        `;
+      </div>
+    </section>
+  </main>
 
-        root.appendChild(el);
-    });
-    </script>
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <p class="footer-copy">
+        &copy; <span data-year>2026</span> Ebru Subutay
+      </p>
+      <ul class="footer-links">
+        <li><a href="https://github.com/subutayebru" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/ebru-subutay-176697139/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://medium.com/@subutayebru" target="_blank" rel="noopener">Medium</a></li>
+        <li><a href="mailto:subutayebru@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
 </html>

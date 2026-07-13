@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Blog — Ebru Subutay</title>
-  <meta name="description" content="Notes by Ebru Subutay on perception, stereo vision, event cameras and VLA robotics." />
+  <title>Photography — Ebru Subutay</title>
+  <meta name="description" content="Photography by Ebru Subutay — gallery coming soon." />
   <meta name="color-scheme" content="dark light" />
   <!-- Favicon: koi fish yin-yang (from emojis.com). -->
   <link rel="icon" type="image/png" href="favicon.png" />
@@ -58,8 +58,8 @@
       <nav class="rail__nav" aria-label="Primary">
         <a href="index.html">Home</a>
         <a href="projects.html">Works</a>
-        <a href="blog.html" aria-current="page">Blog</a>
-        <a href="photography.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="photography.html" aria-current="page">Gallery</a>
       </nav>
       <div class="rail__social">
         <a href="https://github.com/subutayebru" target="_blank" rel="noopener" aria-label="GitHub">
@@ -79,37 +79,34 @@
   </header>
 
   <main id="main">
-    <section class="section" aria-labelledby="blog-h">
+    <section class="section" aria-labelledby="photo-h">
       <div class="wrap">
-        <p class="eyebrow">Blog</p>
-        <h1 class="heading" id="blog-h">Writing</h1>
-        <p class="section-sub">
-          Working notes on perception and robotics. The first post is a full sample;
-          the rest are drafts. Longer write-ups also live on
-          <a href="https://medium.com/@subutayebru" target="_blank" rel="noopener">Medium</a>.
-        </p>
+        <p class="eyebrow">Gallery</p>
+        <h1 class="heading" id="photo-h">Photography</h1>
+        <p class="section-sub">Coming soon.</p>
 
-        <!--
-          PLACEHOLDER CONTENT — replace with real posts.
-          Posts are rendered from the `posts` array in script.js (id="post-list").
-          To add a post: append an object { title, date, readtime, tag, excerpt, url }
-          to that array. The first entry links to post-sample.html; the others use '#'
-          until their pages exist. This keeps the blog trivial to extend.
-        -->
-        <div class="post-list" id="post-list">
-          <!-- Cards injected here by script.js -->
-          <noscript>
-            <p class="muted">Enable JavaScript to view the post list, or read posts on
-              <a href="https://medium.com/@subutayebru" target="_blank" rel="noopener">Medium</a>.</p>
-          </noscript>
-        </div>
-
-        <div class="btn-row">
-          <a class="btn" href="https://medium.com/@subutayebru" target="_blank" rel="noopener">Read more on Medium ↗</a>
-        </div>
+        <!-- Gallery intentionally empty for launch. To re-enable, restore a
+             <div class="gallery" id="gallery"> container here and the `photos`
+             array in script.js (both are preserved in the project history). -->
+        <p class="coming-soon-note">A gallery of my photography is on its way — check back soon.</p>
       </div>
     </section>
   </main>
+
+  <!-- Lightbox dialog -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer" aria-hidden="true">
+    <div class="lightbox__inner">
+      <div class="lightbox__stage" id="lb-stage"></div>
+      <div class="lightbox__bar">
+        <span class="lightbox__cap" id="lb-cap"></span>
+        <div class="lightbox__nav">
+          <button class="icon-btn" id="lb-prev" type="button" aria-label="Previous photo">&larr;</button>
+          <button class="icon-btn" id="lb-next" type="button" aria-label="Next photo">&rarr;</button>
+          <button class="icon-btn" id="lb-close" type="button" aria-label="Close viewer">&times;</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
